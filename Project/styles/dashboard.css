@@ -29,6 +29,8 @@ body {
 }
 #rightsection {
   grid-column-start: 3;
+  background: #ffffff;
+  padding: 5% 0;
 }
 #designerslogo {
   width: 90%;
@@ -122,4 +124,126 @@ h1 {
 #coursessection::-webkit-scrollbar,
 #alertssection::-webkit-scrollbar {
   display: none;
+}
+#innerrightdiv {
+  width: 100%;
+  height: 100%;
+  border-left: solid #afafaf80 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 5%;
+}
+#profilepic {
+  width: 60%;
+}
+#profilepic > img {
+  width: 100%;
+}
+#calendardiv {
+  width: 100%;
+  height: 40%;
+  text-align: center;
+  margin: 5% 0;
+}
+#calendarheader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 85%;
+}
+#calendardays {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.day {
+  width: 14%;
+  height: 20%;
+  flex-shrink: 0;
+  margin: 5% 0;
+  padding: 2%;
+}
+#month {
+  font-weight: 600;
+  margin: 5%;
+}
+#calendarheader {
+  font-weight: 500;
+}
+.todaydate {
+  background-color: #1294f2;
+  border-radius: 100px;
+}
+/* 
+Home Section End */
+
+/* profile image top section */
+.profile-image {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #7cd6ca80;
+  padding: 2%;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+.profile-image img {
+  margin-left: 10%;
+  width: 25%;
+  height: 25%;
+}
+.profile-text {
+  padding: 5%;
+}
+.profile-text h1,
+h3 {
+  padding: 1px;
+}
+
+/* profile image bottom section */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5%;
+  border: 1px solid grey;
+  border-top: none;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+form input,
+label {
+  margin: 1%;
+  display: block;
+  background-color: #fff;
+}
+form div {
+  width: 50%;
+}
+form div input {
+  border: none;
+  border-bottom: 1px solid grey;
+  padding-bottom: 1%;
+  padding-left: 2%;
+  outline: none;
+  width: 70%;
+  font-size: 16px;
+}
+#middlesection h3 {
+  font-weight: 500;
+  font-size: 1em;
+}
+label {
+  font-weight: 600;
+}
+
+/* Attendance */
+
+#chartdiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#chartdiv > div {
+  width: 80%;
+  height: 100%;
 }

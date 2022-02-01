@@ -9,6 +9,7 @@
     <link rel="icon" href="images/D logo.svg" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -43,9 +44,13 @@
       </div>
       <div id="middlesection">
         <h1>Department of Computer Software Engineering, MCS</h1>
-        <h2>Hi Sara</h2>
-        <h4>Let’s see what you’ve got!</h4>
-        <h1>Courses overview</h1>
+        <h2>Attendence Chart</h2>
+        <div id="chartdiv">
+          <div>
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+        <h2>Course-wise Attendence</h2>
         <div id="coursessection">
           <div class="course">
             <div class="courseimage"></div>
@@ -101,13 +106,6 @@
               >
             </div>
           </div>
-        </div>
-        <h1>Alerts and Notifications</h1>
-        <div id="alertssection">
-          <div class="alert"></div>
-          <div class="alert"></div>
-          <div class="alert"></div>
-          <div class="alert"></div>
         </div>
       </div>
       <div id="rightsection">
@@ -170,5 +168,6 @@
       </div>
     </div>
     <script src="/scripts/calender.js"></script>
+    <script src="/scripts/attendence.js"></script>
   </body>
 </html>
