@@ -89,7 +89,7 @@ h1 {
 #alertssection {
   display: flex;
   width: 100%;
-  height: 30%;
+  height: 30% !important;
   overflow-x: scroll;
   margin: 0 0 2% 0;
 }
@@ -108,21 +108,22 @@ h1 {
 }
 .course,
 .alert {
-  height: 100%;
+  height: 100% !important;
   border-radius: 25px;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   justify-content: space-between;
   flex-shrink: 0;
   cursor: pointer;
 }
 .alert {
-  width: 48%;
+  width: 48% !important;
   background-color: #c4c4c4;
   margin: 0 1%;
 }
 #coursessection::-webkit-scrollbar,
-#alertssection::-webkit-scrollbar {
+#alertssection::-webkit-scrollbar,
+#tablediv::-webkit-scrollbar {
   display: none;
 }
 #innerrightdiv {
@@ -246,4 +247,140 @@ label {
 #chartdiv > div {
   width: 80%;
   height: 100%;
+}
+
+/* Attendence table section */
+#tablediv {
+  width: 100%;
+  margin: 5% 0;
+  height: 85%;
+  overflow-y: scroll;
+}
+#tablediv h3 {
+  font-size: 1.4em;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  /* width: 800px; */
+}
+table caption {
+  font-size: 1.2em;
+  margin: 0.8em 0 0.75em;
+}
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: 0.35em;
+}
+
+table th,
+table td {
+  padding: 0.625em;
+  text-align: center;
+}
+
+table th {
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+/* attendence */
+
+input[type="date"] {
+  outline: none;
+  border: none;
+  text-align: center;
+  padding-left: 17%;
+  background-color: #f8f8f8;
+}
+input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 0.625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8em;
+    text-align: right;
+  }
+
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* Attendence details end */
+
+/* Results Section */
+#resultheader {
+  margin-top: 5%;
+}
+#resultsection {
+  display: flex;
+  width: 100%;
+  height: 30%;
+  margin: 0 0 2% 0;
+  flex-wrap: wrap;
+  margin: 2% 0 2% 0;
+}
+.result {
+  width: 31%;
+  background-color: #e8f5f9;
+  margin: 1% 1%;
+  height: 100%;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.resultname {
+  font-size: 0.9em;
+  padding: 3% 5%;
 }

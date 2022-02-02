@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles/dashboard.css" />
     <link rel="icon" href="images/D logo.svg" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -43,71 +44,75 @@
       </div>
       <div id="middlesection">
         <h1>Department of Computer Software Engineering, MCS</h1>
-        <h2>Hi Sara</h2>
-        <h4>Let’s see what you’ve got!</h4>
-        <h1>Courses overview</h1>
-        <div id="coursessection">
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
-              <hr />
-              <span
-                >5th Sem (Fall 2021) <br />
-                SE-210 Software Design and Architecture (BESE-25B)</span
-              >
-            </div>
-          </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
-              <hr />
-              5th Sem (Fall 2021) <br />CC-344 Web Engineering (BESE-25B)
-            </div>
-          </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
-              <hr />
-              5th Sem (Fall 2021) <br />CS-330 Operating System (BESE-25B)
-            </div>
-          </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
-              <hr />
-              <span
-                >5th Sem (Fall 2021) <br />
-                SE-210 Software Design and Architecture (BESE-25B)</span
-              >
-            </div>
-          </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
-              <hr />
-              <span
-                >5th Sem (Fall 2021) <br />
-                SE-210 Software Design and Architecture (BESE-25B)</span
-              >
-            </div>
-          </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
-              <hr />
-              <span
-                >5th Sem (Fall 2021) <br />
-                SE-210 Software Design and Architecture (BESE-25B)</span
-              >
-            </div>
-          </div>
-        </div>
-        <h1>Alerts and Notifications</h1>
-        <div id="alertssection">
-          <div class="alert"></div>
-          <div class="alert"></div>
-          <div class="alert"></div>
-          <div class="alert"></div>
+        <div id="tablediv">
+          <h1 id="resulttable">Results</h1>
+          <table>
+            <!-- <caption>Attendence Table</caption> -->
+            <thead>
+              <tr>
+                <th scope="col" class="assessment">Assessment</th>
+                <th scope="col" class="max-marks">Max Marks</th>
+                <th scope="col" class="obtained-marks">Obtained Marks</th>
+                <th scope="col" class="percentage">Percentage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="assessment">Assignment-1</td>
+                <td class="max-marks">10</td>
+                <td class="obtained-marks">9</td>
+                <td class="percentage">90%</td>
+              </tr>
+              <tr>
+                <td scope="row" class="assessment">Assignment-2</td>
+                <td class="max-marks">10</td>
+                <td class="obtained-marks">8</td>
+                <td class="percentage">80%</td>
+              </tr>
+              <tr>
+                <td scope="row" class="assessment">Assignment-3</td>
+                <td class="max-marks">10</td>
+                <td class="obtained-marks">5</td>
+                <td class="percentage">50%</td>
+              </tr>
+              <tr>
+                <td scope="row" class="assessment">Quiz-1</td>
+                <td class="max-marks">10</td>
+                <td class="obtained-marks">10</td>
+                <td class="percentage">100%</td>
+              </tr>
+              <tr>
+                <td scope="row" class="assessment">Quiz-2</td>
+                <td class="max-marks">10</td>
+                <td class="obtained-marks">7</td>
+                <td class="percentage">70%</td>
+              </tr>
+              <tr>
+                <td scope="row" class="assessment">Quiz-3</td>
+                <td class="max-marks">10</td>
+                <td class="obtained-marks">8</td>
+                <td class="percentage">80%</td>
+              </tr>
+              <tr>
+                <td scope="row" class="assessment">OHT-1</td>
+                <td class="max-marks">15</td>
+                <td class="obtained-marks">8</td>
+                <td class="percentage">56%</td>
+              </tr>
+              <tr>
+                <td scope="row" class="assessment">OHT-2</td>
+                <td class="max-marks">15</td>
+                <td class="obtained-marks">10</td>
+                <td class="percentage">66.66%</td>
+              </tr>
+              <tr>
+                <td scope="row" class="assessment">Final</td>
+                <td class="max-marks">50</td>
+                <td class="obtained-marks">40</td>
+                <td class="percentage">80%</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <div id="rightsection">
@@ -170,5 +175,6 @@
       </div>
     </div>
     <script src="/scripts/calender.js"></script>
+    <script src="/scripts/attendence.js"></script>
   </body>
 </html>

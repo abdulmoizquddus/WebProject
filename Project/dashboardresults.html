@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles/dashboard.css" />
     <link rel="icon" href="images/D logo.svg" />
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <div id="wrapper">
@@ -43,13 +44,11 @@
       </div>
       <div id="middlesection">
         <h1>Department of Computer Software Engineering, MCS</h1>
-        <h2>Hi Sara</h2>
-        <h4>Let’s see what you’ve got!</h4>
-        <h1>Courses overview</h1>
-        <div id="coursessection">
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
+        <h1 id="resultheader">Results</h1>
+        <div id="resultsection">
+          <div class="result">
+            <div class="resultimage"></div>
+            <div class="resultname">
               <hr />
               <span
                 >5th Sem (Fall 2021) <br />
@@ -57,23 +56,23 @@
               >
             </div>
           </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
+          <div class="result">
+            <div class="resultimage"></div>
+            <div class="resultname">
               <hr />
               5th Sem (Fall 2021) <br />CC-344 Web Engineering (BESE-25B)
             </div>
           </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
+          <div class="result">
+            <div class="resultimage"></div>
+            <div class="resultname">
               <hr />
               5th Sem (Fall 2021) <br />CS-330 Operating System (BESE-25B)
             </div>
           </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
+          <div class="result">
+            <div class="resultimage"></div>
+            <div class="resultname">
               <hr />
               <span
                 >5th Sem (Fall 2021) <br />
@@ -81,9 +80,9 @@
               >
             </div>
           </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
+          <div class="result">
+            <div class="resultimage"></div>
+            <div class="resultname">
               <hr />
               <span
                 >5th Sem (Fall 2021) <br />
@@ -91,23 +90,6 @@
               >
             </div>
           </div>
-          <div class="course">
-            <div class="courseimage"></div>
-            <div class="coursename">
-              <hr />
-              <span
-                >5th Sem (Fall 2021) <br />
-                SE-210 Software Design and Architecture (BESE-25B)</span
-              >
-            </div>
-          </div>
-        </div>
-        <h1>Alerts and Notifications</h1>
-        <div id="alertssection">
-          <div class="alert"></div>
-          <div class="alert"></div>
-          <div class="alert"></div>
-          <div class="alert"></div>
         </div>
       </div>
       <div id="rightsection">
@@ -170,5 +152,6 @@
       </div>
     </div>
     <script src="/scripts/calender.js"></script>
+    <script src="/scripts/attendence.js"></script>
   </body>
 </html>
