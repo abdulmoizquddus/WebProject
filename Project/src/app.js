@@ -89,6 +89,12 @@ app.get("/logout", (req, res) => {
 app.get("/admin_dashboard", (req, res) => {
   res.render("admin_dashboard");
 });
+app.post("/home", (req, res) => {
+  if (session.type == "student") {
+    console.log("/home");
+    res.render("student_home");
+  }
+});
 app.post("/profile", (req, res) => {
   if (session.type == "student") {
     res.render("student_profile");
@@ -110,7 +116,18 @@ app.post("/attendence", (req, res) => {
     res.render("student_attendence");
   }
 });
-
+app.get("/results/details", (req, res) => {
+  if (session.type == "student") {
+    console.log("/results/details");
+    res.render("student_results_details");
+  }
+});
+app.get("/attendence/details", (req, res) => {
+  if (session.type == "student") {
+    console.log("/attendence/details");
+    res.render("student_attendence_details");
+  }
+});
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // creates admin 1 time
 
