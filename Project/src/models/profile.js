@@ -5,6 +5,22 @@ const profileSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  FullName: {
+    type: String,
+    required: true,
+  },
+  RegNo: {
+    type: String,
+    required: true,
+  },
+  CourseSection: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: String,
+    required: true,
+  },
   Email: {
     type: String,
     required: true,

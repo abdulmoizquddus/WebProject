@@ -24,14 +24,15 @@ $("#leftsection  ul li:nth-child(5)").on("click", function () {
   });
 });
 
-$("#resultsection .result").on("click", function () {
-  $.get("/results/details", function (data) {
+$("#resultsection a").on("click", function (e) {
+  e.preventDefault(); // cancel the link itself
+  $.post(this.href, function (data) {
     console.log("ajax/results/details");
     $("#middlesection").html(data);
   });
 });
 $(".coursewiseattendence .course").on("click", function () {
-  $.get("/attendence/details", function (data) {
+  $.post("/attendence/details", function (data) {
     console.log("ajax/attendence/details");
     $("#middlesection").html(data);
   });

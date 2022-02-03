@@ -11,20 +11,15 @@ const admin = require("./models/admin"); // imporitng admin as our collection in
 const faculty = require("./models/faculty"); // imporitng faculty as our collection in our database to read/write data to
 const profile = require("./models/profile"); // imporitng profile as our collection in our database to read/write data to
 const subject = require("./models/subject"); // imporitng subject as our collection in our database to read/write data to
-const PORT = process.env.PORT || 3000; // use port 3000 or whatever is in the environment variable PORT
+
+const PORT = process.env.PORT || 3002; // use port 3000 or whatever is in the environment variable PORT
 
 const static_path = path.join(__dirname, "../public"); // path to all static files
 const templates_path = path.join(__dirname, "../templates/views"); // path to views folder
-// const partials_path = path.join(__dirname, "../templates/partials") // path to partials folder
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const oneDay = 1000 * 60 * 60 * 24;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 app.use(express.json()); // built-in middleware function in Express. It parses incoming requests with JSON payloads
 app.use(express.urlencoded({ extended: false })); // express.urlencoded() is a method inbuilt in express to recognize the incoming Request Object as strings or arrays
+const oneDay = 1000 * 60 * 60 * 24;
 app.use(cookieParser());
 app.use(
   sessions({
@@ -49,12 +44,13 @@ we can store that code in partials folder and call ir using syntax: {{> fileName
 
 var session; // global variable for sessison
 
-app.get(["/student_login", "/"], (req, res) => {
+app.get(["/student_login", "/"], async (req, res) => {
   // our login route
   session = req.session;
   console.log(session);
   if (session.userid) {
-    res.render("student_dashboard");
+    const findProfile1 = await profile.findOne({ userId: session.userid });
+    res.render("student_dashboard", { studentList: findProfile1 });
   } else {
     res.render("student_login");
   }
@@ -90,50 +86,77 @@ app.get("/logout", (req, res) => {
 app.get("/admin_dashboard", (req, res) => {
   res.render("admin_dashboard");
 });
+
 app.post("/home", (req, res) => {
   if (session.type == "student") {
     console.log("/home");
     res.render("student_home");
   }
 });
-app.post("/profile", (req, res) => {
-  if (session.type == "student") {
-    res.render("student_profile");
+app.post("/profile", async (req, res) => {
+  try {
+    session = req.session;
+    const findProfile = await profile.findOne({ userId: session.userid });
+
+    if (session.type == "student" && findProfile.userId === session.userid) {
+      console.log(findProfile);
+      res.render("student_profile", { studentList: findProfile });
+    }
+  } catch (err) {
+    res.status(400).send(err);
   }
 });
-app.post("/results", (req, res) => {
+app.post("/results", async (req, res) => {
+  session = req.session;
   if (session.type == "student") {
     res.render("student_results");
   }
 });
+
 app.post("/courses", (req, res) => {
+  session = req.session;
   if (session.type == "student") {
     res.render("student_courses");
   }
 });
+
 app.post("/attendence", (req, res) => {
+  session = req.session;
+  console.log("/attendence");
   if (session.type == "student") {
-    console.log("Hre");
     res.render("student_attendence");
   }
 });
-app.get("/results/details", (req, res) => {
-  if (session.type == "student") {
-    console.log("/results/details");
-    res.render("student_results_details");
+
+app.post("/results/details", async (req, res) => {
+  try {
+    courseId = req.query.courseId;
+    // console.log(courseId)
+    session = req.session;
+    const findSubject = await subject.findOne({
+      userId: session.userid,
+      courseId,
+    });
+
+    if (session.type == "student" && findSubject.userId === session.userid) {
+      res.render("student_results_details", { sujectDetails: findSubject });
+    }
+  } catch (err) {
+    res.status(400).send(err);
   }
 });
-app.get("/attendence/details", (req, res) => {
-  if (session.type == "student") {
-    console.log("/attendence/details");
-    res.render("student_attendence_details");
-  }
+app.post("/attendence/details", (req, res) => {
+  // if (session.type == "student") {
+  console.log("/results/details");
+  res.render("student_attendence_details");
+  // }
 });
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // creates admin 1 time
 
 const findAdmin = admin.findOne({ adminName: "admin" });
-// console.log(findAdmin.adminName);
+// console.log(findAdmin.adminName)
 
 // console.log(asd.studentName)
 // console.log(asd.studentName)
@@ -191,7 +214,7 @@ app.post("/admin_login", async (req, res) => {
     if (name.adminPassword === adminPassword && name.adminName === adminName) {
       session = req.session;
       session.userid = adminName;
-      //   console.log(req.session);
+      //   console.log(req.session)
       res.status(201).render("addUser");
     } else {
       res.send("Invalid username or password");
@@ -215,10 +238,13 @@ app.post("/student_login", async (req, res) => {
       session = req.session;
       session.userid = studentName;
       session.type = "student";
-      //   console.log(req.session);
-      res.status(201).render("student_dashboard");
+      //   console.log(req.session)
+      const findProfile1 = await profile.findOne({ userId: session.userid });
+      res
+        .status(201)
+        .render("student_dashboard", { studentList: findProfile1 });
     } else {
-      res.send("Invalid username or password");
+      res.send("Invalid username or password ()");
     }
   } catch (err) {
     res.status(400).send("Invalid username or password");
@@ -238,7 +264,7 @@ app.post("/faculty_login", async (req, res) => {
     if (name.password === password) {
       session = req.session;
       session.facultyid = facultyName;
-      //   console.log(req.session);
+      //   console.log(req.session)
       res.status(201).render("faculty_dashboard");
     } else {
       res.send("Invalid facultyname or password");
