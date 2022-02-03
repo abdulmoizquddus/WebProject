@@ -9,7 +9,8 @@ require("./db/connect"); // imporitng connect.js file
 const student = require("./models/student"); // imporitng student as our collection in our database to read/write data to
 const admin = require("./models/admin"); // imporitng admin as our collection in our database to read/write data to
 const faculty = require("./models/faculty"); // imporitng faculty as our collection in our database to read/write data to
-
+const profile = require("./models/profile"); // imporitng profile as our collection in our database to read/write data to
+const subject = require("./models/subject"); // imporitng subject as our collection in our database to read/write data to
 const PORT = process.env.PORT || 3000; // use port 3000 or whatever is in the environment variable PORT
 
 const static_path = path.join(__dirname, "../public"); // path to all static files
