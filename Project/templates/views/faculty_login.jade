@@ -7,7 +7,7 @@ html(lang='en')
     |   
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     |   
-    title Faculty panel
+    title Faculty Panel
     |   
     link(rel='stylesheet', href='styles/login.css')
     |   
@@ -18,16 +18,16 @@ html(lang='en')
       #loginpanel
         span.name_of_ind Faculty Login
         |       
-        form(action='/student_login', method='post')
+        form(action='/faculty_login', method='post')
           .input.username
             img#usernamelogo(src='/images/usrnamelogo.svg', alt='')
             |           
-            input#username(type='text', name='userName', placeholder='Username')
+            input#username(type='text', name='fusername', placeholder='Username')
           |         
           .input
             img#passwordlogo(src='/images/passwordlogo.svg', alt='')
             |           
-            input#password(type='password', name='password', placeholder='Password')
+            input#password(type='password', name='fpassword', placeholder='Password')
           |         
           .input.submit
             input#submitlogin(type='submit', name='', value='Login')
@@ -37,4 +37,4 @@ html(lang='en')
       #designerslogo
         img(src='/images/Designer logo.svg', alt='')
         |       
-        h4 &amp;copy 2022 All Rights Reserved
+        h4 &copy 2022 All Rights Reserved

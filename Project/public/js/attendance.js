@@ -11,7 +11,7 @@ var myChart = new Chart(ctx, {
     ],
     datasets: [
       {
-        label: "Overall Attendence",
+        label: "Overall Attendance",
         data: [80, 90, 65, 40, 70, 100],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",

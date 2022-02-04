@@ -19,7 +19,7 @@
 //   });
 // });
 // $("#leftsection  ul li:nth-child(5)").on("click", function () {
-//   $.post("/attendence", function (data) {
+//   $.post("/attendance", function (data) {
 //     $("#middlesection").html(data);
 //   });
 // });

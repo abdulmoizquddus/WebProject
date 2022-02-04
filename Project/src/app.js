@@ -11,6 +11,7 @@ const admin = require("./models/admin"); // imporitng admin as our collection in
 const faculty = require("./models/faculty"); // imporitng faculty as our collection in our database to read/write data to
 const profile = require("./models/profile"); // imporitng profile as our collection in our database to read/write data to
 const subject = require("./models/subject"); // imporitng subject as our collection in our database to read/write data to
+const attendance = require("./models/attendance");
 
 const PORT = process.env.PORT || 3002; // use port 3000 or whatever is in the environment variable PORT
 
@@ -47,8 +48,7 @@ var session; // global variable for sessison
 app.get(["/student_login", "/"], async (req, res) => {
   // our login route
   session = req.session;
-  console.log(session);
-  if (session.userid) {
+  if (session.userid && session.type == "student") {
     const findProfile1 = await profile.findOne({ userId: session.userid });
     res.render("student_dashboard", { studentList: findProfile1 });
   } else {
@@ -56,11 +56,12 @@ app.get(["/student_login", "/"], async (req, res) => {
   }
 });
 
-app.get("/faculty_login", (req, res) => {
+app.get("/faculty_login", async (req, res) => {
   // our login route
   session = req.session;
-  if (session.userid) {
-    res.render("faculty_dashboard");
+  if (session.userid && session.type == "faculty") {
+    const findProfile2 = await profile.findOne({ userId: session.userid });
+    res.render("faculty_dashboard", { studentList: findProfile2 });
   } else {
     res.render("faculty_login");
   }
@@ -99,7 +100,11 @@ app.post("/profile", async (req, res) => {
     const findProfile = await profile.findOne({ userId: session.userid });
 
     if (session.type == "student" && findProfile.userId === session.userid) {
-      console.log(findProfile);
+      res.render("student_profile", { studentList: findProfile });
+    } else if (
+      session.type == "faculty" &&
+      findProfile.userId === session.userid
+    ) {
       res.render("student_profile", { studentList: findProfile });
     }
   } catch (err) {
@@ -119,12 +124,15 @@ app.post("/courses", (req, res) => {
     res.render("student_courses");
   }
 });
-
-app.post("/attendence", (req, res) => {
+var studentforattend;
+app.post("/attendance", async (req, res) => {
   session = req.session;
-  console.log("/attendence");
+  console.log("/attendance");
   if (session.type == "student") {
-    res.render("student_attendence");
+    res.render("student_attendance");
+  } else if ((session.type = "faculty")) {
+    const findProfile = await profile.find({ type: "student" });
+    res.render("faculty_attendance", { Students: findProfile });
   }
 });
 
@@ -145,12 +153,33 @@ app.post("/results/details", async (req, res) => {
     res.status(400).send(err);
   }
 });
-app.post("/attendence/details", (req, res) => {
-  // if (session.type == "student") {
-  console.log("/results/details");
-  res.render("student_attendence_details");
-  // }
+app.post("/attendance/details", async (req, res) => {
+  try {
+    session = req.session;
+    atuserid = req.query.userid;
+    studentforattend = atuserid;
+    if (session.type == "student") {
+      var findatted = await attendance.findOne({ userId: session.userId });
+      res.render("student_results_details", { sujectDetails: findatted });
+    } else if (session.type == "faculty") {
+      var findProfile = await profile.findOne({ userId: atuserid });
+      console.log(findProfile);
+      res.render("faculty_attendance_details", {
+        student: findProfile,
+      });
+    }
+  } catch (err) {
+    res.status(400).send(err);
+  }
 });
+// app.post("/attendance/details", (req, res) => {
+//   if (session.type == "student") {
+//     console.log("/results/details");
+//     res.render("student_attendance_details");
+//   } else if (session.type == "faculty") {
+//     res.render("faculty_attendance_details");
+//   }
+// });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // creates admin 1 time
@@ -256,18 +285,19 @@ app.post("/student_login", async (req, res) => {
 
 app.post("/faculty_login", async (req, res) => {
   try {
-    const facultyName = req.body.facultyName;
-    const password = req.body.password;
-
+    const facultyName = req.body.fusername;
+    const password = req.body.fpassword;
     const name = await faculty.findOne({ facultyName }); // same as ({facultyName: facultyName}) (if both key: value are same we write only key)
-
-    if (name.password === password) {
+    if (name.facultyPassword === password) {
       session = req.session;
-      session.facultyid = facultyName;
-      //   console.log(req.session)
-      res.status(201).render("faculty_dashboard");
+      session.userid = facultyName;
+      session.type = "faculty";
+      const findProfile2 = await profile.findOne({ userId: session.userid });
+      res
+        .status(201)
+        .render("faculty_dashboard", { studentList: findProfile2 });
     } else {
-      res.send("Invalid facultyname or password");
+      res.send("Invalid facultyname or password ()");
     }
   } catch (err) {
     res.status(400).send("Invalid facultyname or password");

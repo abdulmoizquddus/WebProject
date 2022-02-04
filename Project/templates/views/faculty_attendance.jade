@@ -1,0 +1,24 @@
+#tablediv.faculty_attendance
+  h3 Course Name
+  |         
+  table
+    caption
+      | Attendance Details
+    |           
+    thead
+      tr
+        th S.No
+        |               
+        th Student Name
+        |               
+        th Reg. no
+    |           
+    tbody
+        - var i = 1;
+        each student in Students
+            tr(id=student.userId)
+                td #{i}
+                td #{student.FullName}
+                td #{student.RegNo}
+                - i = i+1;
+script(src='js/response.js')

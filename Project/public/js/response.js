@@ -19,7 +19,7 @@ $("#leftsection  ul li:nth-child(4)").on("click", function () {
   });
 });
 $("#leftsection  ul li:nth-child(5)").on("click", function () {
-  $.post("/attendence", function (data) {
+  $.post("/attendance", function (data) {
     $("#middlesection").html(data);
   });
 });
@@ -31,9 +31,31 @@ $("#resultsection a").on("click", function (e) {
     $("#middlesection").html(data);
   });
 });
-$(".coursewiseattendence .course").on("click", function () {
-  $.post("/attendence/details", function (data) {
-    console.log("ajax/attendence/details");
+$(".coursewiseattendance .course").on("click", function () {
+  $.post("/attendance/details", function (data) {
+    console.log("ajax/attendance/details");
+    $("#middlesection").html(data);
+  });
+});
+
+$(".faculty_attendance tbody tr").on("click", function (e) {
+  e.preventDefault();
+  $.post("/attendance/details?userid=" + this.id, function (data) {
+    console.log("ajax/attendance/details");
+    $("#middlesection").html(data);
+  });
+});
+$(".faculty_attendance2 tbody tr").on("click", function (e) {
+  e.preventDefault();
+  $.post("/attendance/details?userid=" + this.id, function (data) {
+    console.log("ajax/attendance/details");
+    $("#middlesection").html(data);
+  });
+});
+$(".faculty_attendance3 tbody tr").on("click", function (e) {
+  e.preventDefault();
+  $.post("/attendance/details?courseid=" + this.id, function (data) {
+    console.log("ajax/attendance/details");
     $("#middlesection").html(data);
   });
 });
