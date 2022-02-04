@@ -159,8 +159,7 @@ app.post("/attendance/details", async (req, res) => {
     atuserid = req.query.userid;
     studentforattend = atuserid;
     if (session.type == "student") {
-      var findatted = await attendance.findOne({ userId: session.userId });
-      res.render("student_results_details", { sujectDetails: findatted });
+      res.render("student_attendance_details");
     } else if (session.type == "faculty") {
       var findProfile = await profile.findOne({ userId: atuserid });
       console.log(findProfile);

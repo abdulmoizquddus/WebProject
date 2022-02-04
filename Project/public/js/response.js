@@ -59,3 +59,10 @@ $(".faculty_attendance3 tbody tr").on("click", function (e) {
     $("#middlesection").html(data);
   });
 });
+$(".coursewiseattendance .course").on("click", function (e) {
+  e.preventDefault();
+  $.post("/attendance/details", function (data) {
+    console.log("ajax/attendance/details");
+    $("#middlesection").html(data);
+  });
+});
