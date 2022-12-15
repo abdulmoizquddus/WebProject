@@ -54,8 +54,8 @@ $(".faculty_attendance2 tbody tr").on("click", function (e) {
 });
 $(".faculty_attendance3 tbody tr").on("click", function (e) {
   e.preventDefault();
-  $.post("/attendance/details?courseid=" + this.id, function (data) {
-    console.log("ajax/attendance/details");
+  $.post("/attendance/details/more", function (data) {
+    console.log("ajax/attendance/details/more");
     $("#middlesection").html(data);
   });
 });

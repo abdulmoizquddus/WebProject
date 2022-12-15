@@ -171,6 +171,11 @@ app.post("/attendance/details", async (req, res) => {
     res.status(400).send(err);
   }
 });
+app.post("/attendance/details/more", (req, res) => {
+  if ((session.type = "faculty")) {
+    res.render("faculty_att_det_std");
+  }
+});
 // app.post("/attendance/details", (req, res) => {
 //   if (session.type == "student") {
 //     console.log("/results/details");
